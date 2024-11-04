@@ -1,4 +1,4 @@
-const API_KEY = '35dfe0ce4dmshf23952ed98d5a12p10eb3djsnb7bea0afd6bb';
+const API_KEY = '863f996b17msh702f87465d3cdfap1e3ad1jsn444217e2a189';
 const API_HOST = 'google-keyword-insight1.p.rapidapi.com';
 
 // Function to fetch Global Results (By URL)
@@ -44,10 +44,10 @@ async function fetchKeywordSuggestions(url) {
 // Main function to call both API functions
 (async function() {
     const testUrl = 'https://www.assettoworld.com';
-
+    //global
     console.log('Fetching Global Results...');
     await fetchGlobalResults(testUrl);
 
-    console.log('\nFetching Keyword Suggestions...');
-    await fetchKeywordSuggestions(testUrl);
+    // console.log('\nFetching Keyword Suggestions...');
+    // await fetchKeywordSuggestions(testUrl);
 })();
