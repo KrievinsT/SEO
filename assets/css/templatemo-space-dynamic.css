@@ -14,13 +14,14 @@ Table of contents
 03. global styles
 04. header
 05. banner
-06. features
-07. testimonials
-08. contact
-09. footer
-10. preloader
-11. search
-12. portfolio
+06. results ui
+07. features
+08. testimonials
+09. contact
+10. footer
+11. preloader
+12. search
+13. portfolio
 
 --------------------------------------------- */
 /* 
@@ -935,7 +936,64 @@ Banner Style
   color: #fff;
 }
 
+/* 
+---------------------------------------------
+Results UI Style
+--------------------------------------------- 
+*/
+#results_UI_background {
+  position: fixed;
+  display: none;
+  top: 0;
+  bottom: 0;
+  width:  100%;
+  height: 100%;
+  z-index: 500;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
+#results_UI {
+  display: none;
+  position: relative;
+  background-color: white;
+  width: 90%;
+  min-height: 90%;
+  border-radius: 20px;
+  height: auto;
+  margin-left: 5%;
+  margin-top: 2%;
+  z-index: 501;
+}
+
+#results_UI h2{
+  color: black;
+  text-align: center;
+  padding: 5px;
+}
+
+.ClosePopup{
+  float: right;
+  height: auto;
+  width: 99%;
+  margin-right: 6px;
+  margin-top: 6px;
+  margin-bottom: 2.3rem;
+}
+
+.ClosePopup button{
+  float: right;
+  height: 1.4rem;
+  border-style: none;
+  padding-bottom: 5px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.ClosePopup button:hover{
+  color:#fe3f40;
+}
 
 /* 
 ---------------------------------------------

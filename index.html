@@ -94,6 +94,7 @@ https://templatemo.com/tm-562-space-dynamic
                     <button type="submit" class="main-button">Analyze Site</button>
                   </fieldset>
                 </form>
+                  <button type="submit" onclick="ShowResultsUI()" class="main-button">Analyze Site</button>
               </div>
             </div>
             <div class="col-lg-6">
@@ -106,6 +107,17 @@ https://templatemo.com/tm-562-space-dynamic
       </div>
     </div>
   </div>
+
+  <!-- ***** Results Pop-up Start ***** -->
+  <div id="results_UI_background">
+    <div id="results_UI">
+      <div class="ClosePopup">
+        <button onclick="HideResultsUI()">✖</button>
+      </div>
+      <h2>Results</h2>
+    </div>
+  </div>
+  <!-- ***** Results Pop-up End ***** -->
 
   <div id="about" class="about-us section">
     <div class="container">
@@ -421,6 +433,7 @@ https://templatemo.com/tm-562-space-dynamic
   <script src="assets/js/animation.js"></script>
   <script src="assets/js/imagesloaded.js"></script>
   <script src="assets/js/templatemo-custom.js"></script>
+  <script src="assets/js/resultsUI.js"></script>
 
 </body>
 </html>
