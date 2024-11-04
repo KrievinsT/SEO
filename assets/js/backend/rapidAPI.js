@@ -43,7 +43,7 @@ async function fetchKeywordSuggestions(url) {
 
 // Main function to call both API functions
 (async function() {
-    const testUrl = 'https://rapidapi.com';
+    const testUrl = 'https://www.assettoworld.com';
 
     console.log('Fetching Global Results...');
     await fetchGlobalResults(testUrl);

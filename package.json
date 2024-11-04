@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "fetch": "^1.1.0",
-    "mysql": "^2.18.1",
-    "node-fetch": "^3.3.2"
-  }
-}
