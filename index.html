@@ -15,6 +15,9 @@
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    <!--Specifies that there is no icon. Fixes a warning-->
+    <link rel="icon" type="image/x-icon" href="#">
+
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-space-dynamic.css">
@@ -105,7 +108,7 @@ https://templatemo.com/tm-562-space-dynamic
           </div>
         </div>
       </div>
-    </div>
+    </div> 
   </div>
 
   <!-- ***** Results Pop-up Start ***** -->
@@ -115,6 +118,15 @@ https://templatemo.com/tm-562-space-dynamic
         <button onclick="HideResultsUI()">✖</button>
       </div>
       <h2>Results</h2>
+      <div class="result_sorter">
+        <select name="sort">
+          <option value="#">Sort</option>
+          <option value="a-z">A - Z</option>
+          <option value="z-a">Z - A</option>
+        </select>
+      </div>
+      <div class="result_screen">
+      </div>
     </div>
   </div>
   <!-- ***** Results Pop-up End ***** -->

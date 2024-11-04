@@ -941,6 +941,47 @@ Banner Style
 Results UI Style
 --------------------------------------------- 
 */
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+#results_UI_background.visible {
+  display: block;
+}
+
+#results_UI {
+  display: none;
+}
+
+#results_UI.visible {
+  display: block;
+  animation: slideUp 0.5s ease forwards;
+}
+
+#results_UI.hidden {
+  display: block;
+  animation: slideDown 0.5s ease forwards;
+}
+
 #results_UI_background {
   position: fixed;
   display: none;
@@ -954,7 +995,7 @@ Results UI Style
 
 #results_UI {
   display: none;
-  position: relative;
+  position: fixed;
   background-color: white;
   width: 90%;
   min-height: 90%;
@@ -968,7 +1009,7 @@ Results UI Style
 #results_UI h2{
   color: black;
   text-align: center;
-  padding: 5px;
+  font-weight: 700;
 }
 
 .ClosePopup{
@@ -995,6 +1036,34 @@ Results UI Style
   color:#fe3f40;
 }
 
+#results_UI .result_sorter {
+  margin-top: 12px;
+  margin-left: 10%;
+  width: 80%;
+  height: 50px;
+}
+
+#results_UI .result_sorter select {
+  display: inline-block;
+  background-color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  color: #fe3f40;
+  text-transform: capitalize;
+  padding: 12px 25px;
+  border-radius: 23px;
+  cursor: pointer;
+  letter-spacing: 0.25px;
+} 
+.result_screen {
+  width: 70%;
+  background-color: rgb(238, 235, 235);
+  margin-top: 10px;
+  margin-left: 15%;
+  height: auto;
+  border-radius: 20px;
+  min-height: 400px;
+}
 /* 
 ---------------------------------------------
 About Us Style
