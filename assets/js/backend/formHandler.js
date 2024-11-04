@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Address submitted:', address);  // This should log the actual URL
 
             if (!address) {
-                alert('No URL provided!');
+                // alert('No URL provided!');
                 return;  // Prevents sending an empty request
             }
 
@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (response.ok) {
                     const result = await response.json();
-                    console.log(result);
+                    // console.log(result);
                 } else {
                     const errorResult = await response.json();
-                    alert(`Error: ${errorResult.message}`);
+                    // alert(`Error: ${errorResult.message}`);
                 }
             } catch (error) {
                 console.error('Fetch Error:', error);
