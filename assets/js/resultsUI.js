@@ -1,10 +1,17 @@
 function ShowResultsUI() {
   var resultsUI = document.getElementById("results_UI");
   var resultsUIBackground = document.getElementById("results_UI_background");
+  var resultArticle = document.getElementById("resultArticle");
   
+  resultArticle.classList.remove("show-result-article");
+  
+  void resultArticle.offsetWidth;
+
+  resultArticle.classList.add("show-result-article");
+
   resultsUI.classList.remove("hidden"); 
   resultsUI.classList.add("visible");   
-  resultsUIBackground.classList.add("visible"); 
+  resultsUIBackground.classList.add("visible");
 }
 
 function HideResultsUI() {
