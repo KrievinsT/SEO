@@ -119,13 +119,26 @@ https://templatemo.com/tm-562-space-dynamic
       </div>
       <h2>Results</h2>
       <div class="result_sorter">
-        <select name="sort">
-          <option value="#">Sort</option>
-          <option value="a-z">A - Z</option>
-          <option value="z-a">Z - A</option>
-        </select>
+        <button class="OpenSortPopup-Button" onclick="OpenSortPopup()">Sort ↓</button>
+        <!-- popop, usually hidden-->
+        <div id="sort_popup">
+          <div class="closeSortPopup">
+            <button onclick="closeSortPopup()">✖</button>
+          </div>
+          <input type="radio" name="sort_order" id="A-Z" checked="checked"> <label for="A-Z">A - Z</label><br>
+          <input type="radio" name="sort_order" id="Z-A"> <label for="Z-A">Z - A</label><br>
+        </div>
+        <!-- end of popup-->
+        <button class="OpenSortPopup-Button" onclick="OpenFilterPopup()">Filter ↓</button>
+        <!-- popop 2, usually hidden-->
+        <div id="filter_popup">
+          <div class="closeFilterPopup">
+            <button onclick="closeFilterPopup()">✖</button>
+          </div>
+        </div>
       </div>
       <div class="result_screen">
+
       </div>
     </div>
   </div>
