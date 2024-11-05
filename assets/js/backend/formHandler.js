@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             const address = addressInput.value;
-            console.log('Address submitted:', address);  // This should log the actual URL
+            console.log('Address submitted:', address); 
 
             if (!address) {
                 // alert('No URL provided!');
-                return;  // Prevents sending an empty request
+                return; 
             }
 
             try {

@@ -21,33 +21,10 @@ async function fetchGlobalResults(url) {
     }
 }
 
-// Function to fetch Keyword Suggestions by URL
-async function fetchKeywordSuggestions(url) {
-    const apiUrl = `https://${API_HOST}/urlkeysuggest/?url=${encodeURIComponent(url)}&location=US&lang=en`;
-    const options = {
-        method: 'GET',
-        headers: {
-            'x-rapidapi-key': API_KEY,
-            'x-rapidapi-host': API_HOST
-        }
-    };
-
-    try {
-        const response = await fetch(apiUrl, options);
-        const result = await response.json();
-        console.log('Keyword Suggestions:', JSON.stringify(result, null, 2)); // Pretty print the result
-    } catch (error) {
-        console.error('Error fetching Keyword Suggestions:', error);
-    }
-}
-
 // Main function to call both API functions
 (async function() {
     const testUrl = 'https://www.assettoworld.com';
     //global
     console.log('Fetching Global Results...');
     await fetchGlobalResults(testUrl);
-
-    // console.log('\nFetching Keyword Suggestions...');
-    // await fetchKeywordSuggestions(testUrl);
 })();
