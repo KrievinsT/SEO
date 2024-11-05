@@ -89,14 +89,22 @@ https://templatemo.com/tm-562-space-dynamic
                 <p>Space Dynamic is a professional looking HTML template using a Bootstrap 5 (beta 2). This CSS template is free for you provided by <a rel="nofollow" href="https://templatemo.com/page/1" target="_parent">TemplateMo</a>.</p>
                 <form id="search" action="#" method="GET">
                   <fieldset>
-                    <input type="url" id="address" name="address" class="email" placeholder="Your website URL..." autocomplete="on" required>
+                      <input type="url" id="address" name="address" class="email" placeholder="Your website URL..." autocomplete="on" required>
                   </fieldset>
                   <fieldset>
-                    <button type="submit" class="main-button">Analyze Site</button>
+                      <button type="submit" class="main-button">Analyze Site</button> 
                   </fieldset>
                 </form>
+                <!-- Buttons for Saved results -->
+                <button type="button" id="saveResults" class="main-button">Save Results</button>
+                <!-- Dropdown for all saved results -->
+                <select id="savedUrlsDropdown">
+                    <option value="">Select a saved URL</option>
+                </select>
+                <!-- Div for messages -->
+                <div id="message" style="margin-top: 20px; color: red;"></div>
                 <!-- Div to display results -->
-                <div id="seoResults"></div>
+                 <div id="seoResults"></div>
               </div>
             </div>
             <div class="col-lg-6">
