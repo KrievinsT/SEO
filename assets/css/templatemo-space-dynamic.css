@@ -1043,6 +1043,27 @@ Results UI Style
   height: 50px;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.fade-in {
+  display: block;
+  animation: fadeIn 0.5s forwards;
+  opacity: 1;
+}
+
+.fade-out {
+  animation: fadeOut 0.5s forwards;
+  opacity: 0; 
+}
+
 .OpenSortPopup-Button {
   display: inline-block;
   background-color: #fff;
@@ -1055,17 +1076,15 @@ Results UI Style
   cursor: pointer;
   letter-spacing: 0.25px;
 } 
-#sort_popup {
+#sort_popup, #filter_popup {
   display: none;
   position: absolute;
   background-color: white;
-  z-index: 5304;
-  height: 80px;
-  width: 95px;
+  z-index: 9999;
+  height: auto;
   border-style: solid;
   border-radius: 20px;
-  padding-left: 17px;
-  padding-top: 20px;
+  padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 #sort_popup input{
@@ -1087,25 +1106,29 @@ Results UI Style
   background-color: white;
   color: black;
   cursor: pointer;
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
 }
 
 .closeSortPopup button:hover{
   color:#fe3f40;
 }
+.closeSortPopup, .closeFilterPopup button {
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.closeFilterPopup button {
+  margin-right: -19px;
+}
+
+#sort_popup {
+  height: 80px;
+  width: 95px;
+}
 
 #filter_popup {
-  display: none;
-  position: absolute;
-  background-color: white;
-  z-index: 5304;
   height: 120px;
   width: 300px;
-  border-style: solid;
-  border-radius: 20px;
-  padding-left: 17px;
-  padding-top: 20px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .closeFilterPopup {
@@ -1121,7 +1144,7 @@ Results UI Style
   background-color: white;
   color: black;
   cursor: pointer;
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
 }
 
 .closeFilterPopup button:hover{

@@ -23,16 +23,54 @@ function HideResultsUI() {
 }
 
 function OpenSortPopup() {
-  var OpenSortPopup = document.getElementById("sort_popup").style.display = "block";
-  var closeFilterPopup = document.getElementById("filter_popup").style.display = "none";
+  var sortPopup = document.getElementById("sort_popup");
+  var filterPopup = document.getElementById("filter_popup");
+  
+  if (filterPopup.classList.contains("fade-in")) {
+    filterPopup.classList.remove("fade-in");
+    filterPopup.classList.add("fade-out");
+    filterPopup.addEventListener("animationend", () => {
+      filterPopup.style.display = "none";
+    }, { once: true });
+  }
+  
+  sortPopup.style.display = "block";
+  sortPopup.classList.remove("fade-out");
+  sortPopup.classList.add("fade-in");
 }
+
 function closeSortPopup() {
-  var closeSortPopup = document.getElementById("sort_popup").style.display = "none";
+  var sortPopup = document.getElementById("sort_popup");
+  sortPopup.classList.remove("fade-in");
+  sortPopup.classList.add("fade-out");
+  sortPopup.addEventListener("animationend", () => {
+    sortPopup.style.display = "none";
+  }, { once: true });
 }
+
 function OpenFilterPopup() {
-  var OpenFilterPopup = document.getElementById("filter_popup").style.display = "block";
-  var closeSortPopup = document.getElementById("sort_popup").style.display = "none";
+  var sortPopup = document.getElementById("sort_popup");
+  var filterPopup = document.getElementById("filter_popup");
+
+  if (sortPopup.classList.contains("fade-in")) {
+    sortPopup.classList.remove("fade-in");
+    sortPopup.classList.add("fade-out");
+    sortPopup.addEventListener("animationend", () => {
+      sortPopup.style.display = "none";
+    }, { once: true });
+  }
+
+  filterPopup.style.display = "block";
+  filterPopup.classList.remove("fade-out");
+  filterPopup.classList.add("fade-in");
 }
+
 function closeFilterPopup() {
-  var closeFilterPopup = document.getElementById("filter_popup").style.display = "none";
+  var filterPopup = document.getElementById("filter_popup");
+  filterPopup.classList.remove("fade-in");
+  filterPopup.classList.add("fade-out");
+  filterPopup.addEventListener("animationend", () => {
+    filterPopup.style.display = "none";
+  }, { once: true });
 }
+
