@@ -15,6 +15,9 @@
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    <!--Specifies that there is no icon. Fixes a warning-->
+    <link rel="icon" type="image/x-icon" href="#">
+
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-space-dynamic.css">
@@ -95,16 +98,6 @@ https://templatemo.com/tm-562-space-dynamic
                       <button type="submit" class="main-button">Analyze Site</button> 
                   </fieldset>
                 </form>
-                <!-- Buttons for Saved results -->
-                <button type="button" id="saveResults" class="main-button">Save Results</button>
-                <!-- Dropdown for all saved results -->
-                <select id="savedUrlsDropdown">
-                    <option value="">Select a saved URL</option>
-                </select>
-                <!-- Div for messages -->
-                <div id="message" style="margin-top: 20px; color: red;"></div>
-                <!-- Div to display results -->
-                 <div id="seoResults"></div>
               </div>
             </div>
             <div class="col-lg-6">
@@ -115,8 +108,46 @@ https://templatemo.com/tm-562-space-dynamic
           </div>
         </div>
       </div>
+    </div> 
+  </div>
+
+  <!-- ***** Results Pop-up Start ***** -->
+  <div id="results_UI_background">
+    <div id="results_UI">
+      <div class="ClosePopup">
+        <button onclick="HideResultsUI()">✖</button>
+      </div>
+      <h2>Results</h2>
+      <div class="result_sorter">
+        <button class="OpenSortPopup-Button" onclick="OpenSortPopup()">Sort ↓</button>
+        <!-- popop, usually hidden-->
+        <div id="sort_popup">
+          <div class="closeSortPopup">
+            <button onclick="closeSortPopup()">✖</button>
+          </div>
+          <input type="radio" name="sort_order" id="searches"><label for="searches">Searches</label><br>
+          <input type="radio" name="sort_order" id="trend"><label for="trend">Trend</label><br>
+          <input type="radio" name="sort_order" id="difficulty_level"><label for="difficulty_level">Difficulty Level</label><br>
+          <input type="radio" name="sort_order" id="highest_cpc"><label for="highest_cpc">Highest CPC</label><br>
+          <input type="radio" name="sort_order" id="lowest_cpc"><label for="lowest_cpc">Lowest CPC</label><br>
+        </div>
+        <!-- end of popup-->
+        <button class="OpenSortPopup-Button" onclick="OpenFilterPopup()">Filter ↓</button>
+        <!-- popop 2, usually hidden-->
+        <div id="filter_popup">
+          <div class="closeFilterPopup">
+            <button onclick="closeFilterPopup()">✖</button>
+          </div>
+          <input type="checkbox" id="keywords"><label for="keywords">Keyword</label><br>
+        </div>
+      </div>
+      <div class="result_screen">
+        <div id="resultArticle" class="show-result-article"></div>
+        <div id="resultArticle" class="show-result-article"></div>
+      </div>
     </div>
   </div>
+  <!-- ***** Results Pop-up End ***** -->
 
   <div id="about" class="about-us section">
     <div class="container">
@@ -432,7 +463,7 @@ https://templatemo.com/tm-562-space-dynamic
   <script src="assets/js/animation.js"></script>
   <script src="assets/js/imagesloaded.js"></script>
   <script src="assets/js/templatemo-custom.js"></script>
-  <script src="assets/js/backend/formHandler.js"></script>
-  <script src="assets/js/backend/script.js"></script>
+  <script src="assets/js/resultsUI.js"></script>
+
 </body>
 </html>
