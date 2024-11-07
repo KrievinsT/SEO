@@ -1005,6 +1005,28 @@ Results UI Style
   margin-top: 2%;
   z-index: 501;
 }
+body.no-scroll {
+  overflow: hidden; 
+}
+#results_UI::-webkit-scrollbar {
+  position: absolute;
+  right: 0;
+  width: 8px; 
+  height: 100%; 
+  z-index: 10; 
+}
+
+#results_UI::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+#results_UI::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.result_screen::-webkit-scrollbar-track {
+  background: transparent; 
+}
 
 #results_UI h2{
   color: black;
@@ -1037,10 +1059,15 @@ Results UI Style
 }
 
 #results_UI .result_sorter {
+  display: flex;
   margin-top: 12px;
   margin-left: 10%;
   width: 80%;
   height: 50px;
+}
+
+.inportantInput {
+  margin-left: 20px;
 }
 
 @keyframes fadeIn {
@@ -1069,14 +1096,21 @@ Results UI Style
   background-color: #fff;
   font-size: 15px;
   font-weight: 400;
+  margin-right: 5px;
   color: #fe3f40;
   text-transform: capitalize;
   padding: 12px 25px;
   border-radius: 23px;
   cursor: pointer;
   letter-spacing: 0.25px;
+  transition-duration: 0.4s;
 }
  
+.OpenSortPopup-Button:hover {
+  color: white;
+  background-color: #fe3f40;
+}
+
 #sort_popup, #filter_popup {
   display: none;
   position: absolute;
@@ -1087,6 +1121,7 @@ Results UI Style
   border-radius: 20px;
   padding-top: 20px;
   padding-left: 14px;
+  
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -1236,9 +1271,35 @@ input[type="checkbox"]:checked + label::after {
   background-color: rgb(238, 235, 235);
   margin-top: 10px;
   margin-left: 15%;
+  margin-bottom: 15px;
   height: auto;
   border-radius: 20px;
   min-height: 400px;
+  max-height: 60vh; 
+  overflow-y: overlay;
+  position: relative;
+}
+
+.result_screen::-webkit-scrollbar {
+  position: absolute;
+  width: 8px; 
+  height: 100%; 
+  margin-right: 5px;
+  background: transparent;
+  z-index: 10;
+}
+
+.result_screen::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.result_screen::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.result_screen::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 @keyframes slideInFromLeft {
@@ -1252,7 +1313,18 @@ input[type="checkbox"]:checked + label::after {
   }
 }
 
-#resultArticle {
+.resultArticle-Top{
+  background-color: #fe3f40;
+  width:100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  height: 50px;
+}
+
+.resultArticle {
+  visibility: hidden;
+  opacity: 0;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 100%;
@@ -1260,14 +1332,20 @@ input[type="checkbox"]:checked + label::after {
   border-radius: 20px;
   margin-top: 1px;
   margin-bottom: 2px;
-  opacity: 0; 
-  transform: translateX(-50px); 
-  transition: opacity 0.5s, transform 0.5s; 
+  transform: translateX(-50px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
+
 .show-result-article {
-  animation: slideInFromLeft 0.5s forwards;
-  animation-delay: 0.7s;
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+.show-result-article[data-delay] {
+  animation-delay: var(--delay);
 }
 
 /* 
