@@ -14,13 +14,14 @@ Table of contents
 03. global styles
 04. header
 05. banner
-06. features
-07. testimonials
-08. contact
-09. footer
-10. preloader
-11. search
-12. portfolio
+06. results ui
+07. features
+08. testimonials
+09. contact
+10. footer
+11. preloader
+12. search
+13. portfolio
 
 --------------------------------------------- */
 /* 
@@ -935,7 +936,339 @@ Banner Style
   color: #fff;
 }
 
+/* 
+---------------------------------------------
+Results UI Style
+--------------------------------------------- 
+*/
 
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+#results_UI_background.visible {
+  display: block;
+}
+
+#results_UI {
+  display: none;
+}
+
+#results_UI.visible {
+  display: block;
+  animation: slideUp 0.5s ease forwards;
+}
+
+#results_UI.hidden {
+  display: block;
+  animation: slideDown 0.5s ease forwards;
+}
+
+#results_UI_background {
+  position: fixed;
+  display: none;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 500;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#results_UI {
+  display: none;
+  position: fixed;
+  background-color: white;
+  width: 90%;
+  min-height: 90%;
+  border-radius: 20px;
+  height: auto;
+  margin-left: 5%;
+  margin-top: 2%;
+  z-index: 501;
+}
+
+#results_UI h2{
+  color: black;
+  text-align: center;
+  font-weight: 700;
+}
+
+.ClosePopup{
+  float: right;
+  height: auto;
+  width: 99%;
+  margin-right: 6px;
+  margin-top: 6px;
+  margin-bottom: 2.3rem;
+}
+
+.ClosePopup button{
+  float: right;
+  height: 1.4rem;
+  border-style: none;
+  padding-bottom: 5px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.ClosePopup button:hover{
+  color:#fe3f40;
+}
+
+#results_UI .result_sorter {
+  margin-top: 12px;
+  margin-left: 10%;
+  width: 80%;
+  height: 50px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.fade-in {
+  display: block;
+  animation: fadeIn 0.5s forwards;
+  opacity: 1;
+}
+
+.fade-out {
+  animation: fadeOut 0.5s forwards;
+  opacity: 0; 
+}
+
+.OpenSortPopup-Button {
+  display: inline-block;
+  background-color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  color: #fe3f40;
+  text-transform: capitalize;
+  padding: 12px 25px;
+  border-radius: 23px;
+  cursor: pointer;
+  letter-spacing: 0.25px;
+}
+ 
+#sort_popup, #filter_popup {
+  display: none;
+  position: absolute;
+  background-color: white;
+  z-index: 9999;
+  height: auto;
+  border-style: solid;
+  border-radius: 20px;
+  padding-top: 20px;
+  padding-left: 14px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#sort_popup input{
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+#sort_popup input:hover{
+  color: #fe3f40;
+}
+
+.closeSortPopup {
+  height: auto;
+  margin-top: -15px;
+}
+
+.closeSortPopup button{
+  height: 1.4rem;
+  border-style: none;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  margin-left: 120px;
+  transition-duration: 0.2s;
+}
+
+.closeSortPopup button:hover{
+  color:#fe3f40;
+}
+
+.closeSortPopup, .closeFilterPopup button {
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.closeFilterPopup button {
+  margin-right: -19px;
+}
+
+#sort_popup {
+  height: auto;
+  width: 165px;
+  padding-bottom: 10px;
+}
+
+#filter_popup {
+  height: 120px;
+  width: 300px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] + label {
+  position: relative;
+  padding-left: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+input[type="radio"] + label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  background-color: white;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+input[type="radio"]:checked + label::before {
+  background-color: #fe3f40;
+  border-color: #fe3f40;
+}
+
+.closeFilterPopup {
+  float: right;
+  height: auto;
+  margin-top: -15px;
+  border-radius: 20px;
+  margin-right: 25px;
+}
+
+.closeFilterPopup button{
+  height: 1.4rem;
+  border-style: none;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.closeFilterPopup button:hover{
+  color:#fe3f40;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+input[type="checkbox"] + label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+input[type="checkbox"]:checked + label::before {
+  background-color: #fe3f40;
+  border-color: #fe3f40;
+}
+
+input[type="checkbox"]:checked + label::after {
+  content: '✔'; 
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: white;
+}
+
+.result_screen {
+  width: 70%;
+  background-color: rgb(238, 235, 235);
+  margin-top: 10px;
+  margin-left: 15%;
+  height: auto;
+  border-radius: 20px;
+  min-height: 400px;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+#resultArticle {
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 100%;
+  height: 50px;
+  border-radius: 20px;
+  margin-top: 1px;
+  margin-bottom: 2px;
+  opacity: 0; 
+  transform: translateX(-50px); 
+  transition: opacity 0.5s, transform 0.5s; 
+}
+
+.show-result-article {
+  animation: slideInFromLeft 0.5s forwards;
+  animation-delay: 0.7s;
+}
 
 /* 
 ---------------------------------------------
