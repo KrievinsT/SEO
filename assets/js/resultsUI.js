@@ -30,16 +30,20 @@ function ShowResultsUI() {
 function HideResultsUI() {
   const resultsUI = document.getElementById("results_UI");
   const resultsUIBackground = document.getElementById("results_UI_background");
+  const messageDiv = document.getElementById('message');
 
+  messageDiv.textContent = '';
   document.body.classList.remove("no-scroll");
 
   resultsUI.classList.add("hidden");
+  closeSortPopup()
 
   setTimeout(() => {
     resultsUI.classList.remove("visible");
     resultsUIBackground.classList.remove("visible");
   }, 500); 
 }
+
 
 function OpenSortPopup() {
   const sortPopup = document.getElementById("sort_popup");
@@ -129,42 +133,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function sortTable(criteria) {
   const resultsDiv = document.getElementById('seoResults');
-  const rows = Array.from(resultsDiv.querySelectorAll('table tr:nth-child(n+2)')); // Skip header row
+  const rows = Array.from(resultsDiv.querySelectorAll('table tr:nth-child(n+2)')); 
 
   rows.sort((rowA, rowB) => {
     const cellA = rowA.querySelector(`td:nth-child(${criteria})`).textContent.trim();
     const cellB = rowB.querySelector(`td:nth-child(${criteria})`).textContent.trim();
 
-    // Handle "Difficulty Level" sorting (column index 4)
-    if (criteria === 4) { // Difficulty Level column
-      const valA = (cellA === 'N/A' || isNaN(cellA)) ? Infinity : parseFloat(cellA); // Treat 'N/A' as Infinity
-      const valB = (cellB === 'N/A' || isNaN(cellB)) ? Infinity : parseFloat(cellB); // Treat 'N/A' as Infinity
+    const valA = isNaN(cellA) ? cellA : parseFloat(cellA.replace(/[^\d.-]/g, ''));
+    const valB = isNaN(cellB) ? cellB : parseFloat(cellB.replace(/[^\d.-]/g, ''));
 
-      return valA - valB; // Sort in ascending order (lower values come first)
-    }
-
-    // Handle "Highest CPC" sorting (column index 6)
-    if (criteria === 6) { // Highest CPC column
-      const valA = (cellA === 'N/A' || isNaN(cellA)) ? -Infinity : parseFloat(cellA.replace(/[^\d.-]/g, '')); // Treat 'N/A' as -Infinity
-      const valB = (cellB === 'N/A' || isNaN(cellB)) ? -Infinity : parseFloat(cellB.replace(/[^\d.-]/g, '')); // Treat 'N/A' as -Infinity
-
-      return valB - valA; // Sort in descending order (higher CPC values come first)
-    }
-
-    // Handle other columns (like "Searches", "Trend", "Lowest CPC", etc.)
-    const valA = (cellA === 'N/A' || isNaN(cellA)) ? Infinity : parseFloat(cellA.replace(/[^\d.-]/g, ''));
-    const valB = (cellB === 'N/A' || isNaN(cellB)) ? Infinity : parseFloat(cellB.replace(/[^\d.-]/g, ''));
-
-    // Sorting ascending for "Lowest CPC" column (column index 5)
     if (criteria === 5) {
+      
       return valA - valB;
     } else {
-      // Sorting descending for other criteria
-      return valB - valA;
+      if (valA < valB) return 1;
+      if (valA > valB) return -1;
+      return 0;
     }
   });
 
-  // Reorder the rows in the table
   rows.forEach(row => resultsDiv.querySelector('table').appendChild(row));
 }
 
