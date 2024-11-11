@@ -3,7 +3,7 @@ const https = require('https');
 const url = require('url');
 const PORT = 3000;
 
-const API_KEY = '194c742d1amsh468196c9892ffd5p170f53jsnd9ad345b1fc0';
+const API_KEY = 'c75fe1866bmsh89afaafeae43df3p1b11bdjsnd7eca604426b';
 const API_HOST = 'google-keyword-insight1.p.rapidapi.com';
 
 const server = http.createServer((req, res) => {
