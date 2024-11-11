@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
             html += generateResultsTable(data);
             resultsDiv.innerHTML = html;
         }
+        ShowResultsUI()
     }
 
     function displaySavedResult(record) {
@@ -159,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Generate results table
     function generateResultsTable(keywords) {
         let html = `
-            <table border="1">
+            <table>
                 <tr>
                     <th>Keyword</th>
                     <th>Searches</th>
