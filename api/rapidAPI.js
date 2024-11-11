@@ -1,10 +1,10 @@
+require('dotenv').config({ path: '../.env' });
 const http = require('http');
 const https = require('https');
 const url = require('url');
-const PORT = 3000;
 
-const API_KEY = '194c742d1amsh468196c9892ffd5p170f53jsnd9ad345b1fc0';
-const API_HOST = 'google-keyword-insight1.p.rapidapi.com';
+const API_KEY = process.env.RAPIDAPI_KEY;
+const API_HOST = process.env.RAPIDAPI_HOST;
 
 const server = http.createServer((req, res) => {
     // Setup CORS headers
@@ -76,6 +76,7 @@ const server = http.createServer((req, res) => {
     }
 });
 
-server.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+// Start the server (for local testing only; not needed in Vercel)
+server.listen(3000, () => {
+    console.log('Server running on http://localhost:3000');
 });

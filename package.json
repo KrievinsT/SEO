@@ -1,0 +1,19 @@
+{
+    "name": "seo",
+    "version": "1.0.0",
+    "scripts": {
+        "dev": "vercel dev",
+        "build": "vercel build"
+    },
+    "dependencies": {
+        "dotenv": "^10.0.0",
+        "mysql": "^2.18.1",
+        "mysql2": "^2.2.5"
+    },
+    "devDependencies": {
+        "@vercel/node": "^1.11.1"
+    },
+    "engines": {
+        "node": ">=14.x"
+    }
+}

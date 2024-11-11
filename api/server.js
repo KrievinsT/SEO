@@ -1,27 +1,27 @@
+require('dotenv').config({ path: '../.env' });
 const http = require('http');
 const https = require('https');
 const url = require('url');
 const mysql = require('mysql');
-const PORT = 3001;
 
 // Database configuration
 const dbConfig = {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'SEO'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 };
 
 // Create a MySQL connection pool
 const db = mysql.createPool(dbConfig);
 
-const API_KEY = '194c742d1amsh468196c9892ffd5p170f53jsnd9ad345b1fc0'; 
-const API_HOST = 'google-keyword-insight1.p.rapidapi.com';
+const API_KEY = process.env.RAPIDAPI_KEY;
+const API_HOST = process.env.RAPIDAPI_HOST;
 
 const server = http.createServer((req, res) => {
     // Setup CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST, GET, POST');
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST, GET');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     // Handle preflight requests
@@ -44,6 +44,16 @@ const server = http.createServer((req, res) => {
             res.end(JSON.stringify({ error: 'URL parameter is missing' }));
             return;
         }
+
+        // Automatically save the URL to the database
+        const insertUrlQuery = 'INSERT INTO url_records (url) VALUES (?)';
+        db.query(insertUrlQuery, [siteUrl], (err, result) => {
+            if (err) {
+                console.error('Database error while saving URL:', err);
+            } else {
+                console.log('URL saved to database:', siteUrl);
+            }
+        });
 
         // Make API request
         const apiUrl = `https://${API_HOST}/globalurl/?url=${encodeURIComponent(siteUrl)}&lang=en`;
@@ -84,6 +94,25 @@ const server = http.createServer((req, res) => {
             console.error('API request error:', error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: 'Failed to fetch data from API', details: error.message }));
+        });
+
+    } else if (pathname === '/submit-url' && req.method === 'POST') {
+        // Handle submitting a URL
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+
+        req.on('end', () => {
+            try {
+                const data = JSON.parse(body);
+                console.log('Received URL:', data.url);
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ message: 'URL received and processed', url: data.url }));
+            } catch (err) {
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: 'Invalid JSON' }));
+            }
         });
 
     } else if (pathname === '/api/save' && req.method === 'POST') {
@@ -237,6 +266,6 @@ const server = http.createServer((req, res) => {
     }
 });
 
-server.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+server.listen(3001, () => {
+    console.log('Server running on http://localhost:3001');
 });
