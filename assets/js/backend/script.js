@@ -42,12 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
             showMessage('No results to save. Please analyze a site first.');
             return;
         }
-
+    
         fetch('http://localhost:3001/api/save', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(latestResults)
         })
         .then(response => {
@@ -60,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             if (data.success) {
-                // Refresh the dropdown
+                // Refresh the dropdown after saving
                 fetchSavedUrls();
             } else {
                 showMessage('Failed to save results.');
@@ -70,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error saving results:', error);
             showMessage(`An error occurred while saving results: ${error.message}`);
         });
-    });
+    });      
 
     // Event listener for the dropdown selection
     document.getElementById('savedUrlsDropdown').addEventListener('change', function() {
@@ -123,19 +121,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function populateSavedUrlsDropdown(urls) {
         const dropdown = document.getElementById('savedUrlsDropdown');
         dropdown.innerHTML = '<option value="">Select a saved URL</option>';
-
+    
         if (urls.length === 0) {
             showMessage('No saved URLs found.', 'orange');
             return;
         }
-
+    
         urls.forEach(url => {
             const option = document.createElement('option');
-            option.value = url.id;
+            option.value = url._id;  // Ensure `_id` is used here, not `id`
             option.textContent = url.url;
             dropdown.appendChild(option);
         });
     }
+    
 
     function displayResults(data, websiteUrl) {
         const resultsDiv = document.getElementById('seoResults');
