@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!address) {
           return;
         }
-  
+        
         try {
           const response = await fetch('http://localhost:3001/submit-url', {
             method: 'POST',
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify({ url: address })
           });
-  
+          
           if (response.ok) {
             const result = await response.json();
             console.log('Server response:', result);

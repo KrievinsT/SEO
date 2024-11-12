@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listener for the form submission
     document.getElementById('search').addEventListener('submit', function(event) {
         event.preventDefault();
-
+        
         const websiteUrl = document.getElementById('address').value;
         fetch(`http://localhost:3001/api/analyze?url=${encodeURIComponent(websiteUrl)}`)
             .then(response => {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showMessage('No results to save. Please analyze a site first.');
             return;
         }
-    
+        
         fetch('http://localhost:3001/api/save', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -126,10 +126,11 @@ document.addEventListener('DOMContentLoaded', function() {
             showMessage('No saved URLs found.', 'orange');
             return;
         }
-    
+        
+        // Populate dropdown with saved URLs
         urls.forEach(url => {
             const option = document.createElement('option');
-            option.value = url._id;  // Ensure `_id` is used here, not `id`
+            option.value = url._id;
             option.textContent = url.url;
             dropdown.appendChild(option);
         });
