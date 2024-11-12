@@ -120,7 +120,7 @@ https://templatemo.com/tm-562-space-dynamic
         <button onclick="HideResultsUI()">✖</button>
       </div>
       <h2>Results</h2>
-      <div id="message" style="margin-top: 20px; color: red;"></div>
+      <div id="message"></div>
       <div class="result_sorter">
         <button class="OpenSortPopup-Button" onclick="OpenSortPopup()">Sort ↓</button>
         <!-- popop, usually hidden-->
@@ -129,24 +129,29 @@ https://templatemo.com/tm-562-space-dynamic
             <button onclick="closeSortPopup()">✖</button>
           </div>
           <input type="radio" name="sort_order" id="searches"><label for="searches">Searches</label><br>
-          <input type="radio" name="sort_order" id="trend"><label for="trend">Trend</label><br>
           <input type="radio" name="sort_order" id="difficulty_level"><label for="difficulty_level">Difficulty Level</label><br>
-          <input type="radio" name="sort_order" id="highest_cpc"><label for="highest_cpc">Highest CPC</label><br>
           <input type="radio" name="sort_order" id="lowest_cpc"><label for="lowest_cpc">Lowest CPC</label><br>
+          <input type="radio" name="sort_order" id="highest_cpc"><label for="highest_cpc">Highest CPC</label><br>
+          <input type="radio" name="sort_order" id="trend"><label for="trend">Trend</label><br>
         </div>
         <!-- end of popup-->
-          <button type="button" id="searchKeywords" class="main-button">Search</button>
-          <input type="text" id="keywords" placeholder="Keywords">
-        
-          <button type="button" id="saveResults" class="main-button">Save Results</button>
-          <!-- Dropdown for all saved results -->
-          <select id="savedUrlsDropdown">
-            <option value="">Select a saved URL</option>
-          </select>
-        
+          <div class="KeywordDiv">
+            <button type="button" id="searchKeywords" class="main-button">Search</button>
+            <input type="text" id="keywords" placeholder="Keywords">
+          </div>
+          <div class="KeywordDiv">
+            <button type="button" id="saveResults" class="main-button">Save Results</button>
+            <!-- Dropdown for all saved results -->
+            <select id="savedUrlsDropdown">
+              <option value="" >Saved URL's</option>
+            </select>
+          </div>
       </div>
-      <div class="result_screen">
+      <div id="result_screen">
         <!-- Div to display results -->
+        <div id="noResultsMessage" class="no-results-message">
+          No results available. Please select URL to display results.
+        </div>
         <div id="seoResults" class="seoResults"></div>
       </div>
     </div>
@@ -471,7 +476,7 @@ https://templatemo.com/tm-562-space-dynamic
   <script src="assets/js/backend/script.js"></script>
   <script src="assets/js/resultsUI.js"></script>
 
-  <script src="assets/js/contactform.js"></script>
+  <!-- <script src="assets/js/contactform.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">

@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function populateSavedUrlsDropdown(urls) {
         const dropdown = document.getElementById('savedUrlsDropdown');
-        dropdown.innerHTML = '<option value="">Select a saved URL</option>';
+        dropdown.innerHTML = '<option value="">Saved URLs</option>';
 
         if (urls.length === 0) {
             showMessage('No saved URLs found.', 'orange');
