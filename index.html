@@ -150,10 +150,20 @@ https://templatemo.com/tm-562-space-dynamic
           </div>
           <input type="checkbox" id="keywords"><label for="keywords">Keyword</label><br>
         </div>
+        <div class="inportantInput">
+          <input>
+        </div>
       </div>
       <div class="result_screen">
-        <div id="resultArticle" class="show-result-article"></div>
-        <div id="resultArticle" class="show-result-article"></div>
+        <div class="resultArticle-Top"></div>
+        <div class="resultArticle"></div>
+        <div class="resultArticle"></div>
+        <div class="resultArticle"></div>
+        <div class="resultArticle"></div>
+        <div class="resultArticle"></div>
+        <div class="resultArticle"></div>
+        <div class="resultArticle"></div>
+        <div class="resultArticle"></div>
       </div>
     </div>
   </div>
@@ -422,25 +432,26 @@ https://templatemo.com/tm-562-space-dynamic
             <div class="row">
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="name" name="name" id="name" placeholder="Name" autocomplete="on" required>
+                  <input type="name" name="name" id="name" placeholder="Name" autocomplete="on">
                 </fieldset>
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="surname" name="surname" id="surname" placeholder="Surname" autocomplete="on" required>
+                  <input type="text" name="subject" id="subject" placeholder="Subject">
                 </fieldset>
               </div>
               <div class="col-lg-12">
                 <fieldset>
-                  <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email" required="">
+                  <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email">
                 </fieldset>
               </div>
               <div class="col-lg-12">
                 <fieldset>
-                  <textarea name="message" type="text" class="form-control" id="message" placeholder="Message" required=""></textarea>  
+                  <textarea name="message" type="text" class="form-control" id="message" placeholder="Message"></textarea>  
                 </fieldset>
               </div>
               <div class="col-lg-12">
+          <div id="error"></div>
                 <fieldset>
                   <button type="submit" id="form-submit" class="main-button ">Send Message</button>
                 </fieldset>
@@ -476,6 +487,17 @@ https://templatemo.com/tm-562-space-dynamic
   <script src="assets/js/resultsUI.js"></script>
   <script src="assets/js/backend/formHandler.js"></script>
   <script src="assets/js/backend/script.js"></script>
-
+  <script src="assets/js/contactform.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function(){
+        emailjs.init({
+          publicKey: "kPFSQuWvsZms0CANj",
+        });
+    })();
+  </script>
 </body>
 </html>

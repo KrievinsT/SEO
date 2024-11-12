@@ -1,17 +1,30 @@
 function ShowResultsUI() {
   var resultsUI = document.getElementById("results_UI");
   var resultsUIBackground = document.getElementById("results_UI_background");
-  var resultArticle = document.getElementById("resultArticle");
-  
-  resultArticle.classList.remove("show-result-article");
-  
-  void resultArticle.offsetWidth;
+  var resultScreen = document.querySelector(".result_screen");
+  var resultArticles = document.querySelectorAll(".resultArticle");
 
-  resultArticle.classList.add("show-result-article");
-
-  resultsUI.classList.remove("hidden"); 
-  resultsUI.classList.add("visible");   
+  resultsUI.classList.remove("hidden");
+  resultsUI.classList.add("visible");
   resultsUIBackground.classList.add("visible");
+
+  document.body.classList.add("no-scroll");
+
+  resultScreen.scrollTop = 0;
+
+  resultArticles.forEach((article) => {
+    article.classList.remove("show-result-article");
+    article.style.visibility = "hidden"; 
+  });
+
+  setTimeout(() => {
+    resultArticles.forEach((article, index) => {
+      setTimeout(() => {
+        article.style.visibility = "visible"; 
+        article.classList.add("show-result-article"); 
+      }, 600 + index * 200); 
+    });
+  }, 100); 
 }
 
 function HideResultsUI() {
@@ -19,6 +32,8 @@ function HideResultsUI() {
   var resultsUIBackground = document.getElementById("results_UI_background");
   var closeSortPopup = document.getElementById("sort_popup").style.display = "none";
   var closeFilterPopup = document.getElementById("filter_popup").style.display = "none";
+
+  document.body.classList.remove("no-scroll");
 
   resultsUI.classList.remove("visible"); 
   resultsUI.classList.add("hidden");     
