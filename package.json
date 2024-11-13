@@ -1,20 +1,23 @@
 {
     "name": "seo",
     "version": "1.0.0",
+    "description": "An SEO analysis tool.",
+    "main": "server.js",
     "scripts": {
-        "dev": "vercel dev",
-        "build": "vercel build"
+        "start": "node server.js",
+        "dev": "vercel dev"
     },
     "dependencies": {
-        "dotenv": "^10.0.0",
-        "mongodb": "^6.10.0",
-        "mysql": "^2.18.1",
-        "mysql2": "^2.2.5"
+        "dotenv": "^8.6.0",
+        "mongodb": "^3.7.4"
     },
     "devDependencies": {
-        "@vercel/node": "^1.11.1"
+        "vercel": "^21.3.3"
     },
     "engines": {
-        "node": ">=14.x"
-    }
+        "node": "14.x"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
 }
