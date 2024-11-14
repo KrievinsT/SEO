@@ -1,6 +1,23 @@
 {
-  "dependencies": {
-    "mysql": "^2.18.1",
-    "node-fetch": "^3.3.2"
-  }
+    "name": "seo",
+    "version": "1.0.0",
+    "description": "An SEO analysis tool.",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "vercel dev"
+    },
+    "dependencies": {
+        "dotenv": "^8.6.0",
+        "mongodb": "^3.7.4"
+    },
+    "devDependencies": {
+        "vercel": "^21.3.3"
+    },
+    "engines": {
+        "node": "14.x"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
 }

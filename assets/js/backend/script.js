@@ -8,13 +8,29 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.textContent = message;
     }
 
+    // Determine the API base URL based on the environment
+    const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:3001' // Backend server URL during development
+        : 'https://seo-vtdt-project.vercel.app'; // Use relative paths in production
+
     // Event listener for the form submission
     document.getElementById('search').addEventListener('submit', function(event) {
         event.preventDefault();
 
-        const websiteUrl = document.getElementById('address').value;
-        fetch(`http://localhost:3001/api/analyze?url=${encodeURIComponent(websiteUrl)}`)
+        const websiteUrl = document.getElementById('address').value.trim();
+        if (!websiteUrl) {
+            showMessage('Please enter a valid URL.', 'orange');
+            return;
+        }
+
+        const submitButton = document.querySelector('#search button[type="submit"]');
+        submitButton.disabled = true; // Disable the submit button to prevent multiple submissions
+
+        fetch(`${API_BASE_URL}/api/analyze?url=${encodeURIComponent(websiteUrl)}`)
             .then(response => {
+                if (response.status === 429) {
+                    throw new Error('Too Many Requests: Please wait a moment before trying again.');
+                }
                 if (!response.ok) {
                     return response.json().then(errData => {
                         throw new Error(errData.error || 'Network response was not ok');
@@ -23,31 +39,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
+                console.log('Data received from /api/analyze:', data);
+
                 latestResults = {
                     url: websiteUrl,
-                    data: data
+                    data: data.data, // The actual analysis data
+                    url_record_id: data.url_record_id // Store the url_record_id
                 };
-                displayResults(data, websiteUrl);
+                console.log('latestResults set to:', latestResults);
+                displayResults(data.data, websiteUrl);
             })
             .catch(error => {
                 console.error('Error:', error);
                 displayResults({ error: error.message }, websiteUrl);
                 showMessage(`Error: ${error.message}`);
+            })
+            .finally(() => {
+                submitButton.disabled = false; // Re-enable the submit button
             });
     });
 
     // Event listener for the "Save Results" button
     document.getElementById('saveResults').addEventListener('click', function() {
         if (!latestResults) {
-            showMessage('No results to save. Please analyze a site first.');
+            showMessage('No results to save. Please analyze a site first.', 'orange');
             return;
         }
 
-        fetch('http://localhost:3001/api/save', {
+        console.log('Sending data to /api/save:', latestResults);
+
+        fetch(`${API_BASE_URL}/api/save`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(latestResults)
         })
         .then(response => {
@@ -60,8 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             if (data.success) {
-                // Refresh the dropdown
+                // Refresh the dropdown after saving
                 fetchSavedUrls();
+                showMessage('Results saved successfully!', 'green');
             } else {
                 showMessage('Failed to save results.');
             }
@@ -76,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('savedUrlsDropdown').addEventListener('change', function() {
         const selectedId = this.value;
         if (selectedId) {
-            fetch(`http://localhost:3001/api/saved/${selectedId}`)
+            fetch(`${API_BASE_URL}/api/saved/${selectedId}`)
                 .then(response => {
                     if (!response.ok) {
                         return response.json().then(errData => {
@@ -99,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to fetch the saved URL dropdown
     function fetchSavedUrls() {
-        fetch('http://localhost:3001/api/saved_urls')
+        fetch(`${API_BASE_URL}/api/saved_urls`)
             .then(response => {
                 if (!response.ok) {
                     return response.json().then(errData => {
@@ -109,11 +133,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
+                console.log('Fetched saved URLs:', data);
                 populateSavedUrlsDropdown(data);
             })
             .catch(error => {
                 console.error('Error fetching saved URLs:', error);
-                showMessage(`An error occurred while fetching saved URLs: ${error.message}`);
+                showMessage(`Error fetching saved URLs: ${error.message}`);
             });
     }
 
@@ -129,9 +154,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        // Populate dropdown with saved URLs
         urls.forEach(url => {
+            console.log('Adding URL to dropdown:', url.url);
             const option = document.createElement('option');
-            option.value = url.id;
+            option.value = url._id;
             option.textContent = url.url;
             dropdown.appendChild(option);
         });
@@ -156,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += generateResultsTable(record.keywords);
         resultsDiv.innerHTML = html;
     }
+
     // Generate results table
     function generateResultsTable(keywords) {
         let html = `
