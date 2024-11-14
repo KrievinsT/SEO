@@ -1,5 +1,3 @@
-// api/analyze.js
-
 require('dotenv').config();
 const https = require('https');
 const { connectToDatabase } = require('../lib/db');

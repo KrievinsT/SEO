@@ -1,5 +1,3 @@
-// api/saved_urls.js
-
 require('dotenv').config();
 const { connectToDatabase } = require('../lib/db');
 

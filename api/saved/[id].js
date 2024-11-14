@@ -1,5 +1,3 @@
-// api/saved/[id].js
-
 require('dotenv').config();
 const { connectToDatabase } = require('../../lib/db');
 const { ObjectId } = require('mongodb');

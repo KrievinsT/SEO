@@ -1,5 +1,3 @@
-// assets/script.js
-
 document.addEventListener('DOMContentLoaded', function() {
     let latestResults = null; // To store the latest analysis results
 
@@ -13,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Determine the API base URL based on the environment
     const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://localhost:3001' // Backend server URL during development
-        : ''; // Use relative paths in production
+        : ' https://seo-vtdt-project.vercel.app'; // Use relative paths in production
 
     // Event listener for the form submission
     document.getElementById('search').addEventListener('submit', function(event) {
