@@ -11,14 +11,12 @@ function ShowResultsUI() {
   resultsUIBackground.classList.add("visible");
   document.body.classList.add("no-scroll");
 
-  // Check if there are any rows in the SEO results table
   if (seoResults && seoResults.querySelectorAll("tr").length > 0) {
-    noDataMessage.style.display = "none"; // Hide the message if data is available
+    noDataMessage.style.display = "none"; 
   } else {
-    noDataMessage.style.display = "block"; // Show message if no data
+    noDataMessage.style.display = "block"; 
   }
 
-  // Reset scroll position if resultScreen exists
   if (resultScreen) { 
     resultScreen.scrollTop = 0; 
   }
@@ -165,7 +163,6 @@ function sortTable(criteria) {
   });
   rows.forEach(row => resultsDiv.querySelector('table').appendChild(row));
 }
-
 function handleSortClick() {
   const sortCriteria = document.querySelector('input[name="sort_order"]:checked');
   if (sortCriteria) {
