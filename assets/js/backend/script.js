@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.textContent = message;
     }
 
-    // Determine the API base URL based on the environment
     const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:3001' // Backend server URL during development
-        : 'https://seo-vtdt-project.vercel.app'; // Use relative paths in production
+    ? 'http://localhost:3001' // Local server during development
+    : 'https://seo-vtdt-project.vercel.app'; // Replace with your Vercel URL
+
 
     // Event listener for the form submission
     document.getElementById('search').addEventListener('submit', function(event) {

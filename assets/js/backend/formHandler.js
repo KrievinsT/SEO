@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Determine the API base URL based on the environment
     const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://localhost:3001' // Backend server URL during development
-        : 'https://seo-vtdt-project.vercel.app'; // Use relative paths in production
+        : 'https://seo-vtdt-project.vercel.app'; // Production URL
 
     if (form && addressInput) {
         form.addEventListener('submit', async function(e) {
@@ -18,22 +18,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            // Sending GET request to '/api/analyze' to handle analysis and saving of the URL
             try {
-                const response = await fetch(`${API_BASE_URL}/api/submit-url`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ url: address })
+                const response = await fetch(`${API_BASE_URL}/api/analyze?url=${encodeURIComponent(address)}`, {
+                    method: 'GET' // GET request since you are fetching data
                 });
 
                 if (response.ok) {
                     const result = await response.json();
-                    console.log('Server response:', result);
-                    alert(result.message);
+                    console.log('Analysis result:', result);
+                    alert('Analysis complete. Check the console for details.');
                 } else {
                     const errorData = await response.json();
-                    console.error('Server Error:', errorData);
+                    console.error('Error during analysis:', errorData);
                     alert(`Error: ${errorData.error}`);
                 }
             } catch (error) {
