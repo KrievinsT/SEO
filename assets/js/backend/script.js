@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function populateSavedUrlsDropdown(urls) {
         const dropdown = document.getElementById('savedUrlsDropdown');
-        dropdown.innerHTML = '<option value="">Select a saved URL</option>';
+        dropdown.innerHTML = '<option value="">Saved URLs</option>';
 
         if (urls.length === 0) {
             showMessage('No saved URLs found.', 'orange');
@@ -174,6 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
             html += generateResultsTable(data);
             resultsDiv.innerHTML = html;
         }
+        ShowResultsUI()
     }
 
     function displaySavedResult(record) {
@@ -187,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Generate results table
     function generateResultsTable(keywords) {
         let html = `
-            <table border="1">
+            <table>
                 <tr>
                     <th>Keyword</th>
                     <th>Searches</th>

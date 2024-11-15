@@ -968,18 +968,17 @@ Results UI Style
   display: block;
 }
 
-#results_UI {
-  display: none;
-}
-
 #results_UI.visible {
   display: block;
+  opacity: 1;
+  visibility: visible;
   animation: slideUp 0.5s ease forwards;
 }
 
 #results_UI.hidden {
-  display: block;
-  animation: slideDown 0.5s ease forwards;
+  animation: fallFadeDown 0.5s ease forwards;
+  opacity: 0;
+  visibility: hidden;
 }
 
 #results_UI_background {
@@ -1005,9 +1004,11 @@ Results UI Style
   margin-top: 2%;
   z-index: 501;
 }
+
 body.no-scroll {
   overflow: hidden; 
 }
+
 #results_UI::-webkit-scrollbar {
   position: absolute;
   right: 0;
@@ -1024,14 +1025,19 @@ body.no-scroll {
 #results_UI::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
-.result_screen::-webkit-scrollbar-track {
-  background: transparent; 
-}
 
 #results_UI h2{
   color: black;
   text-align: center;
   font-weight: 700;
+}
+
+#results_UI .result_sorter {
+  display: flex;
+  margin-top: 12px;
+  margin-left: 10%;
+  width: 80%;
+  height: 50px;
 }
 
 .ClosePopup{
@@ -1058,16 +1064,19 @@ body.no-scroll {
   color:#fe3f40;
 }
 
-#results_UI .result_sorter {
-  display: flex;
-  margin-top: 12px;
-  margin-left: 10%;
-  width: 80%;
-  height: 50px;
-}
-
 .inportantInput {
   margin-left: 20px;
+}
+
+@keyframes fallFadeDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(100px);
+  }
 }
 
 @keyframes fadeIn {
@@ -1091,6 +1100,7 @@ body.no-scroll {
   opacity: 0; 
 }
 
+.OpenSortPopup-Button2,
 .OpenSortPopup-Button {
   display: inline-block;
   background-color: #fff;
@@ -1106,12 +1116,60 @@ body.no-scroll {
   transition-duration: 0.4s;
 }
  
+.OpenSortPopup-Button2{
+  margin-top: 5px;
+}
+
+#searchKeywords,
+#saveResults {
+  display: inline-block;
+  background-color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  margin-left: 50px;
+  color: #fe3f40;
+  text-transform: capitalize;
+  padding: 12px 25px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  cursor: pointer;
+  letter-spacing: 0.25px;
+  transition-duration: 0.4s;
+}
+.main-button:hover,
+#searchKeywords:hover,
+#saveResults:hover,
+.OpenSortPopup-Button2:hover,
 .OpenSortPopup-Button:hover {
   color: white;
   background-color: #fe3f40;
 }
 
-#sort_popup, #filter_popup {
+#message {
+  margin-left: 50px;
+  margin-top: 20px;
+  color: red;
+}
+
+#keywords,
+#savedUrlsDropdown {
+  cursor: pointer;
+  letter-spacing: 0.25px;
+  font-weight: 400;
+  padding: 12px 25px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  transition-duration: 0.4s;
+  border-style: solid;
+  color: gray;
+}
+
+#keywords:hover,
+#savedUrlsDropdown:hover {
+  background-color: rgb(207, 205, 205);
+}
+
+#sort_popup {
   display: none;
   position: absolute;
   background-color: white;
@@ -1121,8 +1179,9 @@ body.no-scroll {
   border-radius: 20px;
   padding-top: 20px;
   padding-left: 14px;
-  
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 #sort_popup input{
@@ -1133,7 +1192,13 @@ body.no-scroll {
 #sort_popup input:hover{
   color: #fe3f40;
 }
-
+#sort_popup.fade-in {
+  display: block;
+  opacity: 1;
+}
+#sort_popup.fade-out {
+  opacity: 0;
+}
 .closeSortPopup {
   height: auto;
   margin-top: -15px;
@@ -1168,11 +1233,6 @@ body.no-scroll {
   padding-bottom: 10px;
 }
 
-#filter_popup {
-  height: 120px;
-  width: 300px;
-}
-
 input[type="radio"] {
   display: none;
 }
@@ -1197,6 +1257,20 @@ input[type="radio"] + label::before {
   border-radius: 50%;
   background-color: white;
   transition: border-color 0.3s, background-color 0.3s;
+}
+
+#noDataMessage {
+  display: none; 
+  color: red; 
+  text-align: center; 
+  margin-top: 20px;
+}
+
+.no-results-message {
+  color: grey;
+  text-align: center;
+  margin-top: 20px;
+  display: none;
 }
 
 input[type="radio"]:checked + label::before {
@@ -1225,52 +1299,13 @@ input[type="radio"]:checked + label::before {
   color:#fe3f40;
 }
 
-input[type="checkbox"] {
-  display: none;
-}
-
-input[type="checkbox"] + label {
-  position: relative;
-  padding-left: 30px;
-  cursor: pointer;
-  font-size: 16px;
-  color: #333;
-}
-
-input[type="checkbox"] + label::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-  background-color: white;
-  transition: border-color 0.3s, background-color 0.3s;
-}
-
-input[type="checkbox"]:checked + label::before {
-  background-color: #fe3f40;
-  border-color: #fe3f40;
-}
-
-input[type="checkbox"]:checked + label::after {
-  content: '✔'; 
-  position: absolute;
-  left: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 14px;
-  color: white;
-}
-
-.result_screen {
+#result_screen {
   width: 70%;
   background-color: rgb(238, 235, 235);
   margin-top: 10px;
   margin-left: 15%;
+  padding-top: 10px;
+  padding-bottom: 10px;
   margin-bottom: 15px;
   height: auto;
   border-radius: 20px;
@@ -1280,7 +1315,7 @@ input[type="checkbox"]:checked + label::after {
   position: relative;
 }
 
-.result_screen::-webkit-scrollbar {
+#result_screen::-webkit-scrollbar {
   position: absolute;
   width: 8px; 
   height: 100%; 
@@ -1289,17 +1324,19 @@ input[type="checkbox"]:checked + label::after {
   z-index: 10;
 }
 
-.result_screen::-webkit-scrollbar-thumb {
+#result_screen::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
 }
 
-.result_screen::-webkit-scrollbar-thumb:hover {
+#result_screen::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
 
-.result_screen::-webkit-scrollbar-track {
-  background: transparent;
+#result_screen::-webkit-scrollbar-track {
+  background: transparent; 
+  margin-top: 15px; 
+  margin-bottom: 15px;
 }
 
 @keyframes slideInFromLeft {
@@ -1313,13 +1350,28 @@ input[type="checkbox"]:checked + label::after {
   }
 }
 
+.loading-spinner {
+  border: 4px solid #f3f3f3; 
+  border-top: 4px solid #3498db; 
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto; 
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .resultArticle-Top{
   background-color: #fe3f40;
   width:100%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  height: 50px;
+  height: 70px;
 }
 
 .resultArticle {
@@ -1328,14 +1380,15 @@ input[type="checkbox"]:checked + label::after {
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 100%;
-  height: 50px;
+  min-height: 70px;
+  height: auto;
   border-radius: 20px;
   margin-top: 1px;
+  padding-bottom: 5px;
   margin-bottom: 2px;
   transform: translateX(-50px);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
 
 .show-result-article {
   visibility: visible;
@@ -1347,6 +1400,124 @@ input[type="checkbox"]:checked + label::after {
 .show-result-article[data-delay] {
   animation-delay: var(--delay);
 }
+
+.seoResults h2,
+.seoResults p {
+  display: none;
+}
+
+.seoResults table {
+  border: transparent;
+}
+
+#result_screen tr {
+  width: 100%;
+}
+
+#result_screen th {
+  padding-left: 38px;
+  padding-top: 10px;
+  text-align: center;
+  width: 14%;
+  border: none;
+}
+#result_screen td {
+  padding-left: 30px;
+  padding-top: 13px;
+  text-align: center;
+  width: 14%;
+  border: none;
+}
+
+@media (max-width: 767px) {
+  /* Stack buttons and inputs inside #results_UI vertically on small screens */
+  #results_UI {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 5%;
+    padding: 10px;
+    min-height: 600px;
+    max-height: 120vh; 
+  }
+
+  .result_sorter {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  /* Make buttons and inputs full-width with spacing between them */
+  .OpenSortPopup-Button, 
+  .OpenSortPopup-Button2,
+  #searchKeywords,
+  #saveResults,
+  #keywords,
+  #savedUrlsDropdown {
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* Adjust message and close buttons alignment */
+  #message {
+    margin: 15px 0;
+    text-align: center;
+  }
+  #saveResults,
+  #searchKeywords {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  #savedUrlsDropdown,
+  #keywords {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+  .ClosePopup, 
+  .closeSortPopup, 
+  .closeFilterPopup {
+    text-align: center;
+  }
+  
+  .ClosePopup button, 
+  .closeSortPopup button, 
+  .closeFilterPopup button {
+    margin: auto;
+  }
+
+  /* Adjust sort popup position and size for smaller screens */
+  #sort_popup {
+    width: 90%;
+    left: 5%;
+    padding: 20px;
+  }
+
+  #result_screen {
+    margin-top: 140px;
+    width: 90%;
+    max-height: 40vh; 
+    min-height: 300px;
+    margin-left: 17px;
+    font-size: 40%;
+  }
+  .KeywordDiv{
+    display: flex;
+  }
+  #result_screen th {
+    padding-left: 3px;
+    padding-top: 10px;
+  }
+  #result_screen td {
+    padding-left: 1px;
+    padding-top: 13px;
+    text-align: center;
+    width: 12%;
+    border: none;
+  }
+}
+
 
 /* 
 ---------------------------------------------
