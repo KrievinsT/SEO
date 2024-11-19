@@ -2,10 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('search');
     const addressInput = document.getElementById('address');
 
-    // Determine the API base URL based on the environment
-    const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:3001' // Backend server URL during development
-        : 'https://seo-vtdt-project.vercel.app'; // Production URL
+    // const API_BASE_URL = 'http://localhost:3001';  //local deployment
+    const API_BASE_URL = 'https://seo-vtdt-project.vercel.app'; // vercel deployemnt project
 
     if (form && addressInput) {
         form.addEventListener('submit', async function(e) {
