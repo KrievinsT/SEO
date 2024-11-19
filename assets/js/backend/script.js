@@ -9,8 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'http://localhost:3001' // Local server during development
-    : 'https://seo-vtdt-project.vercel.app'; // Replace with your Vercel URL
+    ? 'http://localhost:3001'
+    : 'https://seo-vtdt-project.vercel.app';
+    console.log('Hostname:', window.location.hostname);
+    console.log('API Base URL:', API_BASE_URL);
 
 
     // Event listener for the form submission
