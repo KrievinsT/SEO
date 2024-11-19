@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
             },
             {
                 $match: {
-                    "keywords.0": { $exists: true }  // Only return URLs with keyword data
+                    "keywords.0": { $exists: true }
                 }
             },
             { $sort: { timestamp: -1 } }

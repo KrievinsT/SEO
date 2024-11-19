@@ -8,10 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.textContent = message;
     }
 
-    const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'http://localhost:3001' // Local server during development
-    : 'https://seo-vtdt-project.vercel.app'; // Replace with your Vercel URL
-
+    //const API_BASE_URL = 'http://localhost:3001';  //local deployment
+    const API_BASE_URL = 'https://seo-vtdt-project.vercel.app'; // vercel deployemnt project
 
     // Event listener for the form submission
     document.getElementById('search').addEventListener('submit', function(event) {
