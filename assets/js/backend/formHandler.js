@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://localhost:3001' // Backend server URL during development
         : 'https://seo-vtdt-project.vercel.app'; // Production URL
-        console.log('Hostname:', window.location.hostname);
-        console.log('API Base URL:', API_BASE_URL);
 
     if (form && addressInput) {
         form.addEventListener('submit', async function(e) {
@@ -20,19 +18,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Sending GET request to '/api/analyze' to handle analysis and saving of the URL
             try {
-                const response = await fetch(`${API_BASE_URL}/api/analyze?url=${encodeURIComponent(address)}`, {
-                    method: 'GET' // GET request since you are fetching data
+                // POST request to the Express server
+                const response = await fetch(`${API_BASE_URL}/api/analyze`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ url: address })
                 });
 
                 if (response.ok) {
                     const result = await response.json();
-                    console.log('Analysis result:', result);
-                    alert('Analysis complete. Check the console for details.');
+                    console.log('Server response:', result);
+                    alert(result.message);
                 } else {
                     const errorData = await response.json();
-                    console.error('Error during analysis:', errorData);
+                    console.error('Server Error:', errorData);
                     alert(`Error: ${errorData.error}`);
                 }
             } catch (error) {
