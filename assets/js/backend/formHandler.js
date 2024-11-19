@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://localhost:3001' // Backend server URL during development
         : 'https://seo-vtdt-project.vercel.app'; // Production URL
+        console.log('Hostname:', window.location.hostname);
+        console.log('API Base URL:', API_BASE_URL);
 
     if (form && addressInput) {
         form.addEventListener('submit', async function(e) {
