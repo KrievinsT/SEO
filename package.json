@@ -19,7 +19,7 @@
     "vercel": "^21.3.3"
   },
   "engines": {
-    "node": "14.x"
+    "node": "20.x"
   },
   "keywords": [],
   "author": "",
