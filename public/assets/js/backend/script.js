@@ -8,12 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.textContent = message;
     }
 
-    //const API_BASE_URL ='http://localhost:3000';
     const API_BASE_URL = 'https://seo-vtdt-project.vercel.app';
-    console.log('Hostname:', window.location.hostname);
-    console.log('API Base URL:', API_BASE_URL);
-
-
 
     // Event listener for the form submission
     document.getElementById('search').addEventListener('submit', function(event) {
@@ -41,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                console.log('Data received from /api/analyze:', data);
 
             
                 // Handle the case where `data` is an array directly
@@ -51,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     url_record_id: data.url_record_id // Only if the backend provides this
                 };
             
-                console.log('latestResults set to:', latestResults);
                 displayResults(data, websiteUrl); // Pass the array directly to `displayResults`
             })
             .catch(error => {
@@ -68,8 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
             showMessage('No results to save. Please analyze a site first.', 'orange');
             return;
         }
-
-        console.log('Sending data to /api/save:', latestResults);
 
         fetch(`${API_BASE_URL}/api/save`, {
             method: 'POST',
@@ -136,7 +127,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                console.log('Fetched saved URLs:', data);
                 populateSavedUrlsDropdown(data);
             })
             .catch(error => {
@@ -159,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Populate dropdown with saved URLs
         urls.forEach(url => {
-            console.log('Adding URL to dropdown:', url.url);
             const option = document.createElement('option');
             option.value = url._id;
             option.textContent = url.url;

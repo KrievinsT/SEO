@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
-const { connectToDatabase } = require('./lib/db'); // Ensure this file exists and is correct
+const { connectToDatabase } = require('./lib/db');
 dotenv.config();
 
 const app = express();

@@ -2,18 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('search');
     const addressInput = document.getElementById('address');
 
-
-    //const API_BASE_URL ='http://localhost:3000';
     const API_BASE_URL = 'https://seo-vtdt-project.vercel.app';
-        console.log('Hostname:', window.location.hostname);
-        console.log('API Base URL:', API_BASE_URL);
-
 
     if (form && addressInput) {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             const address = addressInput.value.trim();
-            console.log('Address submitted:', address);
 
             if (!address) {
                 alert('Please enter a valid URL.');
@@ -30,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (response.ok) {
                     const result = await response.json();
-                    console.log('Analysis result:', result);
                     alert('Analysis complete. Check the console for details.');
                 } else {
                     const errorData = await response.json();
