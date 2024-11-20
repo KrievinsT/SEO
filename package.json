@@ -8,23 +8,14 @@
     "dev": "vercel dev"
   },
   "dependencies": {
-    "body-parser": "^1.20.3",
-    "cors": "^2.8.5",
     "dotenv": "^8.6.0",
     "express": "^4.21.1",
-    "mangodb": "^1.0.0",
     "mongodb": "^3.7.4"
   },
   "devDependencies": {
-    "vercel": "^21.3.3"
+    "vercel": "^39.0.4"
   },
   "engines": {
     "node": "20.x"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "directories": {
-    "lib": "lib"
   }
 }
