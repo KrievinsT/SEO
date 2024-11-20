@@ -2,10 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('search');
     const addressInput = document.getElementById('address');
 
+
     //const API_BASE_URL ='http://localhost:3000';
     const API_BASE_URL = 'https://seo-vtdt-project.vercel.app';
         console.log('Hostname:', window.location.hostname);
         console.log('API Base URL:', API_BASE_URL);
+
 
     if (form && addressInput) {
         form.addEventListener('submit', async function(e) {
@@ -18,10 +20,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+
             // Sending GET request to '/api/analyze' to handle analysis and saving of the URL
             try {
                 const response = await fetch(`${API_BASE_URL}/api/analyze?url=${encodeURIComponent(address)}`, {
                     method: 'GET' // GET request since you are fetching data
+
                 });
 
                 if (response.ok) {
@@ -31,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     const errorData = await response.json();
                     console.error('Error during analysis:', errorData);
+
                     alert(`Error: ${errorData.error}`);
                 }
             } catch (error) {
