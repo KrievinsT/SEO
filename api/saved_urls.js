@@ -8,13 +8,11 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'OPTIONS') {
-        res.status(204).end();
-        return;
+        return res.status(204).end(); // Preflight request
     }
 
     if (req.method !== 'GET') {
-        res.status(405).json({ error: 'Method not allowed' });
-        return;
+        return res.status(405).json({ error: 'Method not allowed' });
     }
 
     try {
@@ -24,23 +22,23 @@ module.exports = async (req, res) => {
         const results = await urlRecordsCollection.aggregate([
             {
                 $lookup: {
-                    from: "keyword_data",
-                    localField: "_id",
-                    foreignField: "url_record_id",
-                    as: "keywords"
-                }
+                    from: 'keyword_data',
+                    localField: '_id',
+                    foreignField: 'url_record_id',
+                    as: 'keywords',
+                },
             },
             {
                 $match: {
-                    "keywords.0": { $exists: true }
-                }
+                    'keywords.0': { $exists: true },
+                },
             },
-            { $sort: { timestamp: -1 } }
+            { $sort: { timestamp: -1 } },
         ]).toArray();
 
         res.status(200).json(results);
     } catch (err) {
         console.error('Database error:', err);
-        res.status(500).json({ error: 'Database error' });
+        res.status(500).json({ error: 'Failed to fetch saved URLs' });
     }
 };

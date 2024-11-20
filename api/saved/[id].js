@@ -1,24 +1,11 @@
+const express = require('express');
+const router = express.Router();
 require('dotenv').config();
 const { connectToDatabase } = require('../../lib/db');
 const { ObjectId } = require('mongodb');
 
-module.exports = async (req, res) => {
-    // Setup CORS headers
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-    if (req.method === 'OPTIONS') {
-        res.status(204).end();
-        return;
-    }
-
-    if (req.method !== 'GET') {
-        res.status(405).json({ error: 'Method not allowed' });
-        return;
-    }
-
-    const { id } = req.query;
+router.get('/:id', async (req, res) => {
+    const { id } = req.params;
 
     try {
         const { db } = await connectToDatabase();
@@ -34,15 +21,15 @@ module.exports = async (req, res) => {
             return;
         }
 
-        const record = {
+        res.status(200).json({
             url: urlRecord.url,
             timestamp: urlRecord.timestamp,
-            keywords
-        };
-
-        res.status(200).json(record);
+            keywords,
+        });
     } catch (err) {
         console.error('Error fetching saved results:', err);
         res.status(500).json({ error: 'Database error' });
     }
-};
+});
+
+module.exports = router;
