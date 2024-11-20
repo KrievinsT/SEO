@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('API Base URL:', API_BASE_URL);
 
 
+
     // Event listener for the form submission
     document.getElementById('search').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data => {
                 console.log('Data received from /api/analyze:', data);
+
             
                 // Handle the case where `data` is an array directly
                 latestResults = {
@@ -57,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayResults({ error: error.message }, websiteUrl); // Handle errors gracefully
                 showMessage(`Error: ${error.message}`);
             });            
+
     });
 
     // Event listener for the "Save Results" button
@@ -166,12 +169,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function displayResults(data, websiteUrl) {
         const resultsDiv = document.getElementById('seoResults');
-    
+
         if (data.error) {
             resultsDiv.innerHTML = `<p>Error: ${data.error}</p>`;
         } else {
             let html = `<h2>SEO Report for ${websiteUrl}</h2>`;
+
             html += generateResultsTable(data); // Pass the array directly to the table generator
+
             resultsDiv.innerHTML = html;
         }
         ShowResultsUI()
@@ -199,14 +204,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     <th>Trend</th>
                 </tr>
         `;
+
     
         if (Array.isArray(keywords) && keywords.length > 0) {
+
             keywords.forEach(item => {
                 let keyword = item.keyword || item.text || 'N/A';
                 let trendPercentage = item.trend !== undefined && item.trend !== null
                     ? (item.trend * 100).toFixed(2) + '%'
                     : 'N/A';
-    
+
                 html += `
                     <tr>
                         <td>${keyword}</td>
@@ -222,8 +229,10 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             html += `<tr><td colspan="7">No keyword data found.</td></tr>`;
         }
+
     
         html += '</table>';
         return html;
     }    
+
 });
