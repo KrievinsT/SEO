@@ -942,6 +942,7 @@ Results UI Style
 --------------------------------------------- 
 */
 
+
 body.no-scroll {
   overflow: hidden; 
 }
@@ -996,6 +997,18 @@ body.no-scroll {
   visibility: hidden;
 }
 
+
+#results_UI_background {
+  position: fixed;
+  display: none;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 500;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 #results_UI {
   display: none;
   position: fixed;
@@ -1008,6 +1021,7 @@ body.no-scroll {
   margin-top: 2%;
   z-index: 501;
 }
+
 
 #results_UI::-webkit-scrollbar {
   position: absolute;
@@ -1062,7 +1076,9 @@ body.no-scroll {
 
 .ClosePopup button:hover{
   color:#fe3f40;
+
   font-weight: 700;
+
 }
 
 .inportantInput {
@@ -1145,6 +1161,7 @@ body.no-scroll {
   color: white;
   background-color: #fe3f40;
   font-weight: 700;
+
 }
 
 #message {
@@ -1178,6 +1195,7 @@ body.no-scroll {
 #savedUrlsDropdown:hover {
   background-color: rgb(207, 205, 205);
   font-weight: 700;
+
 }
 
 #sort_popup {
@@ -1186,6 +1204,9 @@ body.no-scroll {
   background-color: white;
   z-index: 9999;
   height: auto;
+
+  border-style: solid;
+
   border-radius: 20px;
   padding-top: 20px;
   padding-left: 14px;
@@ -1201,6 +1222,7 @@ body.no-scroll {
 
 #sort_popup input:hover{
   color: #fe3f40;
+
   border: 2px solid #000;
 }
 #sort_popup.fade-in {
@@ -1227,7 +1249,9 @@ body.no-scroll {
 
 .closeSortPopup button:hover{
   color:#fe3f40;
+
   font-weight: 700;
+
 }
 
 .closeSortPopup, .closeFilterPopup button {
@@ -1255,12 +1279,14 @@ input[type="radio"] + label {
   cursor: pointer;
   font-size: 16px;
   color: #333;
+
   transition-duration: 0.2s;
 }
 #sort_popup label:hover {
   font-weight: 700;
   
 }
+
 input[type="radio"] + label::before {
   content: '';
   position: absolute;
@@ -1355,6 +1381,7 @@ input[type="radio"]:checked + label::before {
   margin-bottom: 15px;
 }
 
+
 .resultArticle-Top{
   background-color: #fe3f40;
   width:100%;
@@ -1420,6 +1447,7 @@ input[type="radio"]:checked + label::before {
 }
 
 @media (max-width: 1280px) {
+
   /* Stack buttons and inputs inside #results_UI vertically on small screens */
   #results_UI {
     width: 95%;
@@ -1430,11 +1458,13 @@ input[type="radio"]:checked + label::before {
     max-height: 120vh; 
   }
 
+
   .noResults{
     padding-left: 30px;
     padding-right: 30px;
     font-size: 200%;
   }
+
   .result_sorter {
     flex-direction: column;
     align-items: center;
@@ -1459,6 +1489,7 @@ input[type="radio"]:checked + label::before {
   #savedUrlsDropdown{
     height: 67px;
   }
+
   /* Adjust message and close buttons alignment */
   #message {
     margin: 15px 0;
@@ -1466,6 +1497,7 @@ input[type="radio"]:checked + label::before {
   }
   #saveResults,
   #searchKeywords {
+
     width: 30%;
   }
   
@@ -1474,6 +1506,7 @@ input[type="radio"]:checked + label::before {
   }
   #savedUrlsDropdown {
     padding-right: 80px;
+
   }
   .ClosePopup, 
   .closeSortPopup, 
@@ -1486,9 +1519,11 @@ input[type="radio"]:checked + label::before {
   .closeFilterPopup button {
     margin: auto;
   }
+
   .closeSortPopup {
     margin-left: 270px;
   }
+
 
   /* Adjust sort popup position and size for smaller screens */
   #sort_popup {
@@ -1499,6 +1534,7 @@ input[type="radio"]:checked + label::before {
 
   #result_screen {
     margin-top: 155px;
+
     width: 90%;
     max-height: 40vh; 
     min-height: 300px;
@@ -1520,6 +1556,7 @@ input[type="radio"]:checked + label::before {
     border: none;
   }
 }
+
 @media (min-width:344px) and (max-width: 359px) {
   .closeSortPopup {
     margin-left: 245px;
@@ -1627,6 +1664,7 @@ input[type="radio"]:checked + label::before {
     margin-left: 830px;
   }
 }
+
 /* 
 ---------------------------------------------
 About Us Style

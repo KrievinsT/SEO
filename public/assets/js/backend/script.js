@@ -8,8 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.textContent = message;
     }
 
-    //const API_BASE_URL = 'http://localhost:3001';  //local deployment
-    const API_BASE_URL = 'https://seo-vtdt-project.vercel.app'; // vercel deployemnt project
+    //const API_BASE_URL ='http://localhost:3000';
+    const API_BASE_URL = 'https://seo-vtdt-project.vercel.app';
+    console.log('Hostname:', window.location.hostname);
+    console.log('API Base URL:', API_BASE_URL);
+
+
 
     // Event listener for the form submission
     document.getElementById('search').addEventListener('submit', function(event) {
@@ -39,22 +43,23 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 console.log('Data received from /api/analyze:', data);
 
+            
+                // Handle the case where `data` is an array directly
                 latestResults = {
                     url: websiteUrl,
-                    data: data.data, // The actual analysis data
-                    url_record_id: data.url_record_id // Store the url_record_id
+                    data: data, // Assign the array directly
+                    url_record_id: data.url_record_id // Only if the backend provides this
                 };
+            
                 console.log('latestResults set to:', latestResults);
-                displayResults(data.data, websiteUrl);
+                displayResults(data, websiteUrl); // Pass the array directly to `displayResults`
             })
             .catch(error => {
                 console.error('Error:', error);
-                displayResults({ error: error.message }, websiteUrl);
+                displayResults({ error: error.message }, websiteUrl); // Handle errors gracefully
                 showMessage(`Error: ${error.message}`);
-            })
-            .finally(() => {
-                submitButton.disabled = false; // Re-enable the submit button
-            });
+            });            
+
     });
 
     // Event listener for the "Save Results" button
@@ -169,7 +174,9 @@ document.addEventListener('DOMContentLoaded', function() {
             resultsDiv.innerHTML = `<p>Error: ${data.error}</p>`;
         } else {
             let html = `<h2>SEO Report for ${websiteUrl}</h2>`;
-            html += generateResultsTable(data);
+
+            html += generateResultsTable(data); // Pass the array directly to the table generator
+
             resultsDiv.innerHTML = html;
         }
         ShowResultsUI()
@@ -198,7 +205,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 </tr>
         `;
 
-        if (keywords.length > 0) {
+    
+        if (Array.isArray(keywords) && keywords.length > 0) {
+
             keywords.forEach(item => {
                 let keyword = item.keyword || item.text || 'N/A';
                 let trendPercentage = item.trend !== undefined && item.trend !== null
@@ -221,7 +230,9 @@ document.addEventListener('DOMContentLoaded', function() {
             html += `<tr><td colspan="7">No keyword data found.</td></tr>`;
         }
 
+    
         html += '</table>';
         return html;
-    }
+    }    
+
 });

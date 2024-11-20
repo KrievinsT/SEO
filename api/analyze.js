@@ -1,3 +1,5 @@
+const express = require('express');
+const router = express.Router();
 require('dotenv').config();
 const https = require('https');
 const { connectToDatabase } = require('../lib/db');
@@ -5,19 +7,13 @@ const { connectToDatabase } = require('../lib/db');
 const API_KEY = process.env.RAPIDAPI_KEY;
 const API_HOST = process.env.RAPIDAPI_HOST;
 
-module.exports = async (req, res) => {
-    // Setup CORS headers
+router.get('/', async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'OPTIONS') {
         res.status(204).end();
-        return;
-    }
-
-    if (req.method !== 'GET') {
-        res.status(405).json({ error: 'Method not allowed' });
         return;
     }
 
@@ -75,4 +71,6 @@ module.exports = async (req, res) => {
         console.error('Database error while saving URL:', err);
         res.status(500).json({ error: 'Database error' });
     }
-};
+});
+
+module.exports = router;

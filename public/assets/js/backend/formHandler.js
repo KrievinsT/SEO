@@ -2,8 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('search');
     const addressInput = document.getElementById('address');
 
-    // const API_BASE_URL = 'http://localhost:3001';  //local deployment
-    const API_BASE_URL = 'https://seo-vtdt-project.vercel.app'; // vercel deployemnt project
+
+    //const API_BASE_URL ='http://localhost:3000';
+    const API_BASE_URL = 'https://seo-vtdt-project.vercel.app';
+        console.log('Hostname:', window.location.hostname);
+        console.log('API Base URL:', API_BASE_URL);
+
 
     if (form && addressInput) {
         form.addEventListener('submit', async function(e) {
@@ -16,23 +20,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+
+            // Sending GET request to '/api/analyze' to handle analysis and saving of the URL
             try {
-                // POST request to the Express server
-                const response = await fetch(`${API_BASE_URL}/api/analyze`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ url: address })
+                const response = await fetch(`${API_BASE_URL}/api/analyze?url=${encodeURIComponent(address)}`, {
+                    method: 'GET' // GET request since you are fetching data
+
                 });
 
                 if (response.ok) {
                     const result = await response.json();
-                    console.log('Server response:', result);
-                    alert(result.message);
+                    console.log('Analysis result:', result);
+                    alert('Analysis complete. Check the console for details.');
                 } else {
                     const errorData = await response.json();
-                    console.error('Server Error:', errorData);
+                    console.error('Error during analysis:', errorData);
+
                     alert(`Error: ${errorData.error}`);
                 }
             } catch (error) {
