@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     //const API_BASE_URL ='http://localhost:3000';
-    const API_BASE_URL = 'https://seo-vtdt-project.vercel.app';
+    //const API_BASE_URL = 'https://seo-vtdt-project.vercel.app';
     console.log('Hostname:', window.location.hostname);
     console.log('API Base URL:', API_BASE_URL);
 
