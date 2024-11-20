@@ -1062,6 +1062,7 @@ body.no-scroll {
 
 .ClosePopup button:hover{
   color:#fe3f40;
+  font-weight: 700;
 }
 
 .inportantInput {
@@ -1143,6 +1144,7 @@ body.no-scroll {
 .OpenSortPopup-Button:hover {
   color: white;
   background-color: #fe3f40;
+  font-weight: 700;
 }
 
 #message {
@@ -1175,6 +1177,7 @@ body.no-scroll {
 #keywords:hover,
 #savedUrlsDropdown:hover {
   background-color: rgb(207, 205, 205);
+  font-weight: 700;
 }
 
 #sort_popup {
@@ -1224,6 +1227,7 @@ body.no-scroll {
 
 .closeSortPopup button:hover{
   color:#fe3f40;
+  font-weight: 700;
 }
 
 .closeSortPopup, .closeFilterPopup button {
